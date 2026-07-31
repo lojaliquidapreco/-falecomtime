@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#6D28D9">
+<meta name="description" content="Catálogo de consultores, entregas e dúvidas frequentes.">
+<title>Fale com nosso time</title>
+<style>
+  :root{
+    --roxo:#6D28D9;
+    --roxo-escuro:#4C1D95;
+    --roxo-claro:#8B5CF6;
+    --lavanda:#F5F3FF;
+    --branco:#fff;
+    --texto:#241B35;
+    --cinza:#6B6475;
+    --borda:#E8E1F3;
+    --verde:#25D366;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:linear-gradient(180deg,#F5F3FF 0%,#fff 48%,#F8F5FF 100%);
+    color:var(--texto);
+  }
+  .app{max-width:520px;margin:auto;min-height:100vh;padding-bottom:28px}
+  header{
+    background:linear-gradient(135deg,var(--roxo-escuro),var(--roxo),var(--roxo-claro));
+    color:#fff;padding:34px 20px 28px;border-radius:0 0 28px 28px;
+    text-align:center;box-shadow:0 10px 30px rgba(76,29,149,.22);
+  }
+  .logo{
+    width:76px;height:76px;border-radius:22px;background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.28);display:flex;align-items:center;
+    justify-content:center;margin:0 auto 15px;font-size:34px;font-weight:800;
+  }
+  h1{font-size:27px;margin:0 0 7px}
+  .subtitle{margin:0;opacity:.9;font-size:14px}
+  main{padding:22px 16px}
+  .screen{display:none}
+  .screen.active{display:block;animation:fade .2s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+  .section-title{font-size:21px;margin:5px 0 6px}
+  .section-sub{font-size:13px;color:var(--cinza);margin:0 0 16px}
+  .grid{display:grid;gap:12px}
+  .menu-card,.person{
+    width:100%;border:1px solid var(--borda);background:#fff;border-radius:18px;
+    padding:17px;box-shadow:0 5px 18px rgba(76,29,149,.07);
+  }
+  button{font:inherit}
+  .menu-card{
+    display:flex;align-items:center;gap:14px;text-align:left;cursor:pointer;
+    transition:.15s;border:none;
+  }
+  .menu-card:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(76,29,149,.12)}
+  .icon{
+    width:48px;height:48px;min-width:48px;border-radius:15px;background:var(--lavanda);
+    display:flex;align-items:center;justify-content:center;font-size:23px;
+  }
+  .menu-card strong{display:block;font-size:16px;margin-bottom:4px}
+  .menu-card span{font-size:12px;color:var(--cinza)}
+  .arrow{margin-left:auto;color:var(--roxo);font-size:23px}
+  .back{
+    border:0;background:transparent;color:var(--roxo);font-weight:700;
+    padding:5px 0 16px;cursor:pointer;
+  }
+  .person{
+    display:flex;align-items:center;gap:12px;padding:14px;
+  }
+  .avatar{
+    width:44px;height:44px;border-radius:50%;background:var(--lavanda);
+    color:var(--roxo);display:flex;align-items:center;justify-content:center;
+    font-weight:800;text-transform:uppercase;
+  }
+  .person-info{flex:1;min-width:0}
+  .person-name{font-weight:800;text-transform:capitalize;font-size:15px}
+  .phone{font-size:12px;color:var(--cinza);margin-top:4px}
+  .whats{
+    background:var(--verde);color:#fff;text-decoration:none;border-radius:12px;
+    padding:10px 12px;font-size:12px;font-weight:800;white-space:nowrap;
+  }
+  .faq{
+    background:#fff;border:1px solid var(--borda);border-radius:16px;
+    margin-bottom:10px;overflow:hidden;
+  }
+  .faq summary{
+    cursor:pointer;padding:16px;font-weight:800;font-size:14px;list-style:none;
+  }
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary:after{content:"+";float:right;color:var(--roxo);font-size:20px;line-height:14px}
+  .faq[open] summary:after{content:"−"}
+  .answer{padding:0 16px 16px;font-size:13px;line-height:1.55;color:#514A5D}
+  .answer strong{color:var(--texto)}
+  .contact-box{
+    background:var(--lavanda);border-radius:18px;padding:17px;margin-top:18px;
+    border:1px solid var(--borda)
+  }
+  .contact-box h3{margin:0 0 7px;font-size:15px}
+  .contact-box p{margin:0;font-size:13px;color:var(--cinza);line-height:1.5}
+  footer{text-align:center;color:#8B8495;font-size:11px;padding:8px 20px}
+  @media(min-width:600px){body{padding:18px 0}.app{border-radius:28px;overflow:hidden;box-shadow:0 15px 45px rgba(35,20,60,.12);background:#fff}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="logo">✓</div>
+  <h1>Fale com nosso time</h1>
+  <p class="subtitle">Encontre o consultor certo para você</p>
+</header>
+
+<main>
+  <section id="home" class="screen active">
+    <h2 class="section-title">Como podemos ajudar?</h2>
+    <p class="section-sub">Escolha uma opção abaixo.</p>
+    <div class="grid">
+      <button class="menu-card" onclick="showScreen('vendas')">
+        <div class="icon">🛍️</div>
+        <div><strong>Vendas</strong><span>Fale com nossos consultores</span></div>
+        <div class="arrow">›</div>
+      </button>
+      <button class="menu-card" onclick="showScreen('entregas')">
+        <div class="icon">🚚</div>
+        <div><strong>Entregas</strong><span>Consulte nossos prestadores</span></div>
+        <div class="arrow">›</div>
+      </button>
+      <button class="menu-card" onclick="showScreen('duvidas')">
+        <div class="icon">❓</div>
+        <div><strong>Dúvidas</strong><span>Confira as perguntas frequentes</span></div>
+        <div class="arrow">›</div>
+      </button>
+    </div>
+  </section>
+
+  <section id="vendas" class="screen">
+    <button class="back" onclick="showScreen('home')">← Voltar</button>
+    <h2 class="section-title">Vendas</h2>
+    <p class="section-sub">Escolha o setor que você procura.</p>
+    <div class="grid">
+      <button class="menu-card" onclick="showScreen('mobile')">
+        <div class="icon">📱</div>
+        <div><strong>Smartphones e Mobile</strong><span>Fale com um consultor</span></div>
+        <div class="arrow">›</div>
+      </button>
+      <button class="menu-card" onclick="showScreen('eletro')">
+        <div class="icon">🏠</div>
+        <div><strong>Eletrodomésticos</strong><span>Fale com um consultor</span></div>
+        <div class="arrow">›</div>
+      </button>
+    </div>
+  </section>
+
+  <section id="mobile" class="screen">
+    <button class="back" onclick="showScreen('vendas')">← Voltar para Vendas</button>
+    <h2 class="section-title">Smartphones e Mobile</h2>
+    <p class="section-sub">Escolha um consultor para falar pelo WhatsApp.</p>
+    <div id="mobile-list" class="grid"></div>
+  </section>
+
+  <section id="eletro" class="screen">
+    <button class="back" onclick="showScreen('vendas')">← Voltar para Vendas</button>
+    <h2 class="section-title">Eletrodomésticos</h2>
+    <p class="section-sub">Escolha um consultor para falar pelo WhatsApp.</p>
+    <div id="eletro-list" class="grid"></div>
+  </section>
+
+  <section id="entregas" class="screen">
+    <button class="back" onclick="showScreen('home')">← Voltar</button>
+    <h2 class="section-title">Entregas</h2>
+    <p class="section-sub">Consulte um dos nossos prestadores para orçamento.</p>
+    <div id="entregas-list" class="grid"></div>
+    <div class="contact-box">
+      <h3>Importante</h3>
+      <p>Nenhum dos produtos possui entrega inclusa. O orçamento da entrega deve ser combinado diretamente com o prestador.</p>
+    </div>
+  </section>
+
+  <section id="duvidas" class="screen">
+    <button class="back" onclick="showScreen('home')">← Voltar</button>
+    <h2 class="section-title">Dúvidas frequentes</h2>
+    <p class="section-sub">Confira as principais informações antes de visitar nossa loja.</p>
+
+    <details class="faq"><summary>📍 Qual é o endereço?</summary><div class="answer">Rodovia Raposo Tavares, km 99, Sorocaba – SP, dentro do <strong>Panorâmico Power Center</strong>.</div></details>
+    <details class="faq"><summary>🕐 Qual é o horário de atendimento?</summary><div class="answer"><strong>Segunda a sábado:</strong> 10h às 21h.<br><strong>Domingos e feriados:</strong> 10h às 18h.</div></details>
+    <details class="faq"><summary>🛒 Como comprar?</summary><div class="answer">A venda é feita <strong>somente presencialmente em loja</strong>. Como nossos produtos podem conter pequenas avarias estéticas, é necessário que o cliente veja e escolha o produto.</div></details>
+    <details class="faq"><summary>⏳ Vocês fazem reservas?</summary><div class="answer">Não realizamos nenhum tipo de reserva via Instagram. Em caso de negociação com algum de nossos consultores, o produto ficará reservado por no máximo <strong>1h30 em loja</strong>.</div></details>
+    <details class="faq"><summary>💳 Quais formas de pagamento?</summary><div class="answer">Não parcelamos no boleto ou crediário. Aceitamos apenas: <strong>PIX, dinheiro, cartão de crédito e cartão de débito.</strong></div></details>
+    <details class="faq"><summary>🚚 A entrega está inclusa?</summary><div class="answer">Não. Nenhum dos produtos possui entrega inclusa. Temos dois prestadores de serviço de entrega da loja; consulte-os para orçamento.</div></details>
+    <details class="faq"><summary>📦 Os produtos têm avarias?</summary><div class="answer">Todos os nossos produtos podem conter <strong>avarias estéticas</strong>, mas nenhum produto possui avaria funcional.</div></details>
+    <details class="faq"><summary>🛡️ Qual é a garantia?</summary><div class="answer">Nossos produtos possuem <strong>garantia de 3 meses</strong>. Também pode ser adquirida uma garantia estendida de 12 meses. O valor é informado pelo vendedor no ato da compra.</div></details>
+  </section>
+</main>
+
+<footer>© <span id="year"></span> • Fale com nosso time</footer>
+</div>
+
+<script>
+const mobile = [
+  ["Maju","+55 15 99603-9797","5515996039797"],
+  ["Clau","+55 15 99274-5207","5515992745207"],
+  ["Taís","+55 15 99737-6864","5515997376864"],
+  ["Natalia","+55 11 94993-1537","55119499931537"],
+  ["Cintia","+55 11 99768-9931","5511997689931"],
+  ["Gabi","+55 15 98119-2404","5515981192404"],
+  ["Narieli","+55 15 99805-5997","5515998055997"]
+];
+
+const eletro = [
+  ["João","+55 15 99180-6356","5515991806356"],
+  ["José","+55 15 98808-3923","5515988083923"],
+  ["Rafael","+55 15 99621-5875","5515996215875"],
+  ["Leandro","+55 15 98166-4099","5515981664099"],
+  ["Cristian","+55 11 99866-0107","5511998660107"],
+  ["Tiago","+55 15 99162-0454","5515991620454"],
+  ["Cesar","+55 15 99706-0702","5515997060702"],
+  ["Anderson","+55 11 95246-2878","5511952462878"],
+  ["Bruno","+55 15 98171-2843","5515981712843"],
+  ["Santana","+55 15 98136-2103","5515981362103"],
+  ["Odair","+55 11 99244-7051","5511992447051"],
+  ["Ingrid","+55 11 97428-2214","5511974282214"],
+  ["Edvan","+55 15 98149-2770","55159981492770"],
+  ["Everton","+55 15 99630-3585","5515996303585"],
+  ["Vinicius","+55 15 98146-3754","55159981463754"],
+  ["Walter","+55 15 99669-9592","5515996699592"],
+  ["Felipe","+55 15 99827-0561","5515998270561"]
+];
+
+const entregas = [
+  ["Mauricio","+55 11 99886-6832","5511998866832"],
+  ["Douglas","+55 11 94757-2392","5511947572392"]
+];
+
+function personCard([name, phone, wa]){
+  const initial = name.charAt(0);
+  const msg = encodeURIComponent("Olá! Vim pelo catálogo e gostaria de falar com você.");
+  return `<div class="person">
+    <div class="avatar">${initial}</div>
+    <div class="person-info"><div class="person-name">${name}</div><div class="phone">${phone}</div></div>
+    <a class="whats" href="https://wa.me/${wa}?text=${msg}" target="_blank" rel="noopener">WhatsApp</a>
+  </div>`;
+}
+
+document.getElementById("mobile-list").innerHTML = mobile.map(personCard).join("");
+document.getElementById("eletro-list").innerHTML = eletro.map(personCard).join("");
+document.getElementById("entregas-list").innerHTML = entregas.map(personCard).join("");
+document.getElementById("year").textContent = new Date().getFullYear();
+
+function showScreen(id){
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+  history.replaceState(null,"","#"+id);
+}
+</script>
+</body>
+</html>
