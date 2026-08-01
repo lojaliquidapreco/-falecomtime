@@ -122,11 +122,6 @@
         <div><strong>Vendas</strong><span>Fale com nossos consultores</span></div>
         <div class="arrow">›</div>
       </button>
-      <button class="menu-card" onclick="showScreen('entregas')">
-        <div class="icon">🚚</div>
-        <div><strong>Entregas</strong><span>Consulte nossos prestadores</span></div>
-        <div class="arrow">›</div>
-      </button>
       <button class="menu-card" onclick="showScreen('duvidas')">
         <div class="icon">❓</div>
         <div><strong>Dúvidas</strong><span>Confira as perguntas frequentes</span></div>
@@ -167,17 +162,6 @@
     <div id="eletro-list" class="grid"></div>
   </section>
 
-  <section id="entregas" class="screen">
-    <button class="back" onclick="showScreen('home')">← Voltar</button>
-    <h2 class="section-title">Entregas</h2>
-    <p class="section-sub">Consulte um dos nossos prestadores para orçamento.</p>
-    <div id="entregas-list" class="grid"></div>
-    <div class="contact-box">
-      <h3>Importante</h3>
-      <p>Nenhum dos produtos possui entrega inclusa. O orçamento da entrega deve ser combinado diretamente com o prestador.</p>
-    </div>
-  </section>
-
   <section id="duvidas" class="screen">
     <button class="back" onclick="showScreen('home')">← Voltar</button>
     <h2 class="section-title">Dúvidas frequentes</h2>
@@ -188,9 +172,9 @@
     <details class="faq"><summary>🛒 Como comprar?</summary><div class="answer">A venda é feita <strong>somente presencialmente em loja</strong>. Como nossos produtos podem conter pequenas avarias estéticas, é necessário que o cliente veja e escolha o produto.</div></details>
     <details class="faq"><summary>⏳ Vocês fazem reservas?</summary><div class="answer">Não realizamos nenhum tipo de reserva via Instagram. Em caso de negociação com algum de nossos consultores, o produto ficará reservado por no máximo <strong>1h30 em loja</strong>.</div></details>
     <details class="faq"><summary>💳 Quais formas de pagamento?</summary><div class="answer">Não parcelamos no boleto ou crediário. Aceitamos apenas: <strong>PIX, dinheiro, cartão de crédito e cartão de débito.</strong></div></details>
-    <details class="faq"><summary>🚚 A entrega está inclusa?</summary><div class="answer">Não. Nenhum dos produtos possui entrega inclusa. Temos dois prestadores de serviço de entrega da loja; consulte-os para orçamento.</div></details>
+    <details class="faq"><summary>🚚 Entrega</summary><div class="answer">Não fazemos entrega, mas no ato da compra temos alguns prestadores de serviço para <strong>INDICAR</strong>.</div></details>
     <details class="faq"><summary>📦 Os produtos têm avarias?</summary><div class="answer">Todos os nossos produtos podem conter <strong>avarias estéticas</strong>, mas nenhum produto possui avaria funcional.</div></details>
-    <details class="faq"><summary>🛡️ Qual é a garantia?</summary><div class="answer">Nossos produtos possuem <strong>garantia de 3 meses</strong>. Também pode ser adquirida uma garantia estendida de 12 meses. O valor é informado pelo vendedor no ato da compra.</div></details>
+    <details class="faq"><summary>🛡️ Qual é a garantia?</summary><div class="answer">Todos os produtos possuem <strong>90 dias de garantia</strong>, e você pode adicionar <strong>+9 meses como garantia estendida</strong>, totalizando 12 meses.</div></details>
   </section>
 </main>
 
@@ -203,7 +187,7 @@ const mobile = [
   ["Clau","+55 15 99274-5207","5515992745207"],
   ["Taís","+55 15 99737-6864","5515997376864"],
   ["Natalia","+55 11 94993-1537","55119499931537"],
-  ["Cintia","+55 11 99768-9931","5511997689931"],
+  ["Cintia","+55 15 99805-9588","5515998059588"],
   ["Gabi","+55 15 98119-2404","5515981192404"],
   ["Narieli","+55 15 99805-5997","5515998055997"]
 ];
@@ -213,19 +197,14 @@ const eletro = [
   ["José","+55 15 98808-3923","5515988083923"],
   ["Rafael","+55 15 99621-5875","5515996215875"],
   ["Leandro","+55 15 98166-4099","5515981664099"],
-  ["Cristian","+55 11 99866-0107","5511998660107"],
   ["Tiago","+55 15 99162-0454","5515991620454"],
   ["Cesar","+55 15 99706-0702","5515997060702"],
-  ["Anderson","+55 11 95246-2878","5511952462878"],
   ["Bruno","+55 15 98171-2843","5515981712843"],
   ["Santana","+55 15 98136-2103","5515981362103"],
   ["Odair","+55 11 99244-7051","5511992447051"],
-  ["Ingrid","+55 11 97428-2214","5511974282214"],
-  ["Edvan","+55 15 98149-2770","55159981492770"],
-  ["Everton","+55 15 99630-3585","5515996303585"],
+  ["Ingrid","+55 11 91693-1343","5511916931343"],
   ["Vinicius","+55 15 98146-3754","55159981463754"],
   ["Walter","+55 15 99669-9592","5515996699592"],
-  ["Felipe","+55 15 99827-0561","5515998270561"]
 ];
 
 const entregas = [
