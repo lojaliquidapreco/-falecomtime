@@ -3,535 +3,228 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diretório de Atendimento</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#6D28D9">
+<meta name="description" content="Catálogo de consultores, entregas e dúvidas frequentes.">
+<title>Fale com nosso time</title>
 <style>
   :root{
-    --bg:#EDEFF3;
-    --paper:#FFFFFF;
-    --ink:#12172B;
-    --muted:#5B6478;
-    --line:#D8DCE5;
-    --vendas:#6D28D9;
-    --vendas-soft:#F1EBFC;
-    --sac:#9333EA;
-    --sac-soft:#F4EBFD;
-    --duvidas:#A21CAF;
-    --duvidas-soft:#F9E9F8;
+    --roxo:#6D28D9;
+    --roxo-escuro:#4C1D95;
+    --roxo-claro:#8B5CF6;
+    --lavanda:#F5F3FF;
+    --branco:#fff;
+    --texto:#241B35;
+    --cinza:#6B6475;
+    --borda:#E8E1F3;
+    --verde:#25D366;
   }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
   body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Inter',sans-serif;
-    min-height:100vh;
-    -webkit-font-smoothing:antialiased;
-  }
-  body::before{
-    content:'';
-    position:fixed; inset:0;
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size:56px 56px;
-    opacity:.35;
-    pointer-events:none;
-    z-index:0;
-  }
-  .wrap{
-    position:relative; z-index:1;
-    max-width:920px;
-    margin:0 auto;
-    padding:48px 24px 96px;
-  }
-  .eyebrow{
-    font-family:'JetBrains Mono',monospace;
-    font-size:12px;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    color:var(--muted);
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-bottom:14px;
-  }
-  .eyebrow::before{
-    content:'';
-    width:8px;height:8px;
-    background:var(--ink);
-    border-radius:1px;
-    display:inline-block;
-  }
-  h1{
-    font-family:'Space Grotesk',sans-serif;
-    font-weight:700;
-    font-size:clamp(30px,5vw,46px);
-    line-height:1.08;
-    margin:0 0 12px;
-    letter-spacing:-.01em;
-  }
-  .lede{
-    color:var(--muted);
-    font-size:16px;
-    max-width:520px;
-    margin:0 0 40px;
-    line-height:1.5;
-  }
-  .view{ display:none; }
-  .view.active{ display:block; animation:rise .38s ease both; }
-  @keyframes rise{
-    from{opacity:0; transform:translateY(10px);}
-    to{opacity:1; transform:translateY(0);}
-  }
-  .tab-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:28px 20px;
-    margin-top:8px;
-  }
-  @media(max-width:680px){ .tab-grid{grid-template-columns:1fr;} }
-  .tab-card{
-    position:relative;
-    margin-top:26px;
-    background:var(--paper);
-    border:1px solid var(--line);
-    border-radius:2px 10px 10px 10px;
-    padding:26px 20px 22px;
-    cursor:pointer;
-    text-align:left;
-    font:inherit;
-    color:inherit;
-    box-shadow:0 1px 0 rgba(18,23,43,.02);
-    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-  }
-  .tab-card:hover, .tab-card:focus-visible{
-    transform:translateY(-3px);
-    box-shadow:0 14px 28px -16px rgba(18,23,43,.35);
-    border-color:var(--tab-color);
-    outline:none;
-  }
-  .tab-card::before{
-    content:attr(data-label);
-    position:absolute;
-    top:-24px; left:18px;
-    background:var(--tab-color);
-    color:#fff;
-    padding:7px 20px 12px;
-    font-family:'JetBrains Mono',monospace;
-    font-size:11px;
-    font-weight:600;
-    letter-spacing:.1em;
-    clip-path:polygon(8% 0, 92% 0, 100% 100%, 0% 100%);
-  }
-  .tab-card .num{
-    font-family:'JetBrains Mono',monospace;
-    font-size:11px;
-    color:var(--muted);
-    letter-spacing:.08em;
-  }
-  .tab-card h3{
-    font-family:'Space Grotesk',sans-serif;
-    font-size:20px;
-    margin:8px 0 6px;
-  }
-  .tab-card p{
     margin:0;
-    color:var(--muted);
-    font-size:13.5px;
-    line-height:1.45;
+    font-family:Arial, Helvetica, sans-serif;
+    background:linear-gradient(180deg,#F5F3FF 0%,#fff 48%,#F8F5FF 100%);
+    color:var(--texto);
   }
-  .tab-card .go{
-    margin-top:14px;
-    font-size:13px;
-    font-weight:600;
-    color:var(--tab-color);
-    display:flex; align-items:center; gap:6px;
+  .app{max-width:520px;margin:auto;min-height:100vh;padding-bottom:28px}
+  header{
+    background:linear-gradient(135deg,var(--roxo-escuro),var(--roxo),var(--roxo-claro));
+    color:#fff;padding:34px 20px 28px;border-radius:0 0 28px 28px;
+    text-align:center;box-shadow:0 10px 30px rgba(76,29,149,.22);
   }
+  .logo{
+    width:76px;height:76px;border-radius:22px;background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.28);display:flex;align-items:center;
+    justify-content:center;margin:0 auto 15px;font-size:34px;font-weight:800;
+  }
+  h1{font-size:27px;margin:0 0 7px}
+  .subtitle{margin:0;opacity:.9;font-size:14px}
+  main{padding:22px 16px}
+  .screen{display:none}
+  .screen.active{display:block;animation:fade .2s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+  .section-title{font-size:21px;margin:5px 0 6px}
+  .section-sub{font-size:13px;color:var(--cinza);margin:0 0 16px}
+  .grid{display:grid;gap:12px}
+  .menu-card,.person{
+    width:100%;border:1px solid var(--borda);background:#fff;border-radius:18px;
+    padding:17px;box-shadow:0 5px 18px rgba(76,29,149,.07);
+  }
+  button{font:inherit}
+  .menu-card{
+    display:flex;align-items:center;gap:14px;text-align:left;cursor:pointer;
+    transition:.15s;border:none;
+  }
+  .menu-card:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(76,29,149,.12)}
+  .icon{
+    width:48px;height:48px;min-width:48px;border-radius:15px;background:var(--lavanda);
+    display:flex;align-items:center;justify-content:center;font-size:23px;
+  }
+  .menu-card strong{display:block;font-size:16px;margin-bottom:4px}
+  .menu-card span{font-size:12px;color:var(--cinza)}
+  .arrow{margin-left:auto;color:var(--roxo);font-size:23px}
   .back{
-    background:none; border:none; cursor:pointer;
-    font-family:'JetBrains Mono',monospace;
-    font-size:12px;
-    color:var(--muted);
-    letter-spacing:.05em;
-    display:inline-flex; align-items:center; gap:6px;
-    padding:8px 0;
-    margin-bottom:22px;
-    transition:color .15s ease;
+    border:0;background:transparent;color:var(--roxo);font-weight:700;
+    padding:5px 0 16px;cursor:pointer;
   }
-  .back:hover{ color:var(--ink); }
-  .setor-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:16px;
-    margin-top:8px;
+  .person{
+    display:flex;align-items:center;gap:12px;padding:14px;
   }
-  @media(max-width:680px){ .setor-grid{grid-template-columns:1fr;} }
-  .setor-card{
-    background:var(--paper);
-    border:1px solid var(--line);
-    border-left:4px solid var(--vendas);
-    border-radius:6px;
-    padding:22px 20px;
-    cursor:pointer;
-    text-align:left;
-    font:inherit;
-    color:inherit;
-    transition:transform .18s ease, box-shadow .18s ease;
+  .avatar{
+    width:44px;height:44px;border-radius:50%;background:var(--lavanda);
+    color:var(--roxo);display:flex;align-items:center;justify-content:center;
+    font-weight:800;text-transform:uppercase;
   }
-  .setor-card:hover{
-    transform:translateY(-2px);
-    box-shadow:0 12px 24px -16px rgba(18,23,43,.3);
+  .person-info{flex:1;min-width:0}
+  .person-name{font-weight:800;text-transform:capitalize;font-size:15px}
+  .phone{font-size:12px;color:var(--cinza);margin-top:4px}
+  .whats{
+    background:var(--verde);color:#fff;text-decoration:none;border-radius:12px;
+    padding:10px 12px;font-size:12px;font-weight:800;white-space:nowrap;
   }
-  .setor-card h3{
-    font-family:'Space Grotesk',sans-serif;
-    font-size:18px;
-    margin:0 0 6px;
+  .faq{
+    background:#fff;border:1px solid var(--borda);border-radius:16px;
+    margin-bottom:10px;overflow:hidden;
   }
-  .setor-card span.tag{
-    font-family:'JetBrains Mono',monospace;
-    font-size:11px;
-    color:var(--muted);
-    letter-spacing:.06em;
+  .faq summary{
+    cursor:pointer;padding:16px;font-weight:800;font-size:14px;list-style:none;
   }
-  .setor-card .count{
-    margin-top:12px;
-    font-size:13px;
-    color:var(--vendas);
-    font-weight:600;
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary:after{content:"+";float:right;color:var(--roxo);font-size:20px;line-height:14px}
+  .faq[open] summary:after{content:"−"}
+  .answer{padding:0 16px 16px;font-size:13px;line-height:1.55;color:#514A5D}
+  .answer strong{color:var(--texto)}
+  .contact-box{
+    background:var(--lavanda);border-radius:18px;padding:17px;margin-top:18px;
+    border:1px solid var(--borda)
   }
-  .note{
-    font-family:'JetBrains Mono',monospace;
-    font-size:11px;
-    letter-spacing:.04em;
-    color:var(--duvidas);
-    background:var(--duvidas-soft);
-    display:inline-block;
-    padding:5px 10px;
-    border-radius:4px;
-    margin-bottom:20px;
-  }
-  .setor-title{
-    font-family:'Space Grotesk',sans-serif;
-    font-size:26px;
-    margin:0 0 4px;
-  }
-  .setor-sub{
-    color:var(--muted);
-    font-size:14px;
-    margin:0 0 22px;
-  }
-  .vendor-list{ display:flex; flex-direction:column; gap:12px; }
-  .vendor-card{
-    background:var(--paper);
-    border:1px solid var(--line);
-    border-radius:8px;
-    padding:16px 18px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:16px;
-    flex-wrap:wrap;
-  }
-  .vendor-left{ display:flex; align-items:center; gap:14px; }
-  .vendor-code{
-    font-family:'JetBrains Mono',monospace;
-    font-size:11px;
-    color:#fff;
-    background:var(--vendas);
-    padding:4px 8px;
-    border-radius:4px;
-    flex-shrink:0;
-  }
-  .vendor-name{
-    font-weight:600;
-    font-size:15px;
-  }
-  .vendor-role{
-    display:block;
-    font-size:12.5px;
-    color:var(--muted);
-    font-weight:400;
-    margin-top:2px;
-  }
-  .vendor-actions{ display:flex; gap:8px; flex-wrap:wrap; }
-  .btn{
-    font-family:'Inter',sans-serif;
-    font-size:13px;
-    font-weight:600;
-    text-decoration:none;
-    padding:8px 14px;
-    border-radius:6px;
-    border:1px solid var(--line);
-    color:var(--ink);
-    transition:background .15s ease, border-color .15s ease;
-    display:inline-flex; align-items:center; gap:6px;
-  }
-  .btn.whats{ background:var(--vendas); color:#fff; border-color:var(--vendas); }
-  .btn.whats:hover{ opacity:.9; }
-  .btn.mail:hover{ border-color:var(--ink); }
-  .sac-card{
-    background:var(--paper);
-    border:1px solid var(--line);
-    border-left:4px solid var(--sac);
-    border-radius:8px;
-    padding:26px 24px;
-    max-width:480px;
-  }
-  .sac-row{
-    display:flex; justify-content:space-between; align-items:center;
-    padding:12px 0;
-    border-bottom:1px solid var(--line);
-    font-size:14px;
-  }
-  .sac-row:last-child{ border-bottom:none; }
-  .sac-row .label{ color:var(--muted); font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:.05em; }
-  .faq-list{ display:flex; flex-direction:column; gap:10px; }
-  .faq-item{
-    background:var(--paper);
-    border:1px solid var(--line);
-    border-radius:8px;
-    overflow:hidden;
-  }
-  .faq-q{
-    width:100%;
-    text-align:left;
-    background:none;
-    border:none;
-    cursor:pointer;
-    padding:16px 18px;
-    font-family:'Inter',sans-serif;
-    font-size:14.5px;
-    font-weight:600;
-    color:var(--ink);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:12px;
-  }
-  .faq-q .plus{
-    font-family:'JetBrains Mono',monospace;
-    color:var(--duvidas);
-    font-size:16px;
-    transition:transform .2s ease;
-    flex-shrink:0;
-  }
-  .faq-item.open .plus{ transform:rotate(45deg); }
-  .faq-a{
-    max-height:0;
-    overflow:hidden;
-    transition:max-height .25s ease, padding .25s ease;
-    padding:0 18px;
-    color:var(--muted);
-    font-size:14px;
-    line-height:1.55;
-  }
-  .faq-item.open .faq-a{
-    max-height:240px;
-    padding:0 18px 18px;
-  }
+  .contact-box h3{margin:0 0 7px;font-size:15px}
+  .contact-box p{margin:0;font-size:13px;color:var(--cinza);line-height:1.5}
+  footer{text-align:center;color:#8B8495;font-size:11px;padding:8px 20px}
+  @media(min-width:600px){body{padding:18px 0}.app{border-radius:28px;overflow:hidden;box-shadow:0 15px 45px rgba(35,20,60,.12);background:#fff}}
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="app">
+<header>
+  <div class="logo">✓</div>
+  <h1>Fale com nosso time</h1>
+  <p class="subtitle">Encontre o consultor certo para você</p>
+</header>
 
-  <!-- ================= HOME ================= -->
-  <div class="view active" id="view-home">
-    <div class="eyebrow">Diretório 2026</div>
-    <h1>Fale com nosso time</h1>
-    <p class="lede">Escolha por onde quer começar. Separamos vendas por setor pra você já cair com o consultor certo.</p>
-
-    <div class="tab-grid">
-      <button class="tab-card" style="--tab-color:var(--vendas)" data-label="Vendas" onclick="showView('view-vendas-setores')">
-        <span class="num">01</span>
-        <h3>Vendas</h3>
-        <p>Fale com um consultor por setor: smartphones, mobile ou eletrodomésticos.</p>
-        <span class="go">Escolher setor →</span>
+<main>
+  <section id="home" class="screen active">
+    <h2 class="section-title">Como podemos ajudar?</h2>
+    <p class="section-sub">Escolha uma opção abaixo.</p>
+    <div class="grid">
+      <button class="menu-card" onclick="showScreen('vendas')">
+        <div class="icon">🛍️</div>
+        <div><strong>Vendas</strong><span>Fale com nossos consultores</span></div>
+        <div class="arrow">›</div>
       </button>
-
-      <button class="tab-card" style="--tab-color:var(--sac)" data-label="Entregas" onclick="showView('view-entregas')">
-        <span class="num">02</span>
-        <h3>Entregas</h3>
-        <p>Fale direto com o time responsável pelas entregas.</p>
-        <span class="go">Ver contatos →</span>
-      </button>
-
-      <button class="tab-card" style="--tab-color:var(--duvidas)" data-label="Dúvidas" onclick="showView('view-duvidas')">
-        <span class="num">03</span>
-        <h3>Dúvidas</h3>
-        <p>Perguntas frequentes sobre entrega, pagamento e garantia.</p>
-        <span class="go">Ver perguntas →</span>
+      <button class="menu-card" onclick="showScreen('duvidas')">
+        <div class="icon">❓</div>
+        <div><strong>Dúvidas</strong><span>Confira as perguntas frequentes</span></div>
+        <div class="arrow">›</div>
       </button>
     </div>
-  </div>
+  </section>
 
-  <!-- ================= VENDAS: SETORES ================= -->
-  <div class="view" id="view-vendas-setores">
-    <button class="back" onclick="showView('view-home')">← voltar ao início</button>
-    <div class="eyebrow">Vendas</div>
-    <h1>Selecione o setor</h1>
-    <p class="lede">Cada setor tem um time dedicado. Escolha o que combina com o que você procura.</p>
-
-    <div class="setor-grid">
-      <button class="setor-card" onclick="abrirSetor('smartphones')">
-        <span class="tag">SETOR · 01</span>
-        <h3>Smartphones e Mobile</h3>
-        <span class="count" id="count-smartphones"></span>
+  <section id="vendas" class="screen">
+    <button class="back" onclick="showScreen('home')">← Voltar</button>
+    <h2 class="section-title">Vendas</h2>
+    <p class="section-sub">Escolha o setor que você procura.</p>
+    <div class="grid">
+      <button class="menu-card" onclick="showScreen('mobile')">
+        <div class="icon">📱</div>
+        <div><strong>Smartphones e Mobile</strong><span>Fale com um consultor</span></div>
+        <div class="arrow">›</div>
       </button>
-      <button class="setor-card" onclick="abrirSetor('eletro')">
-        <span class="tag">SETOR · 02</span>
-        <h3>Eletrodomésticos</h3>
-        <span class="count" id="count-eletro"></span>
+      <button class="menu-card" onclick="showScreen('eletro')">
+        <div class="icon">🏠</div>
+        <div><strong>Eletrodomésticos</strong><span>Fale com um consultor</span></div>
+        <div class="arrow">›</div>
       </button>
     </div>
-  </div>
+  </section>
 
-  <!-- ================= VENDAS: LISTA DE VENDEDORES ================= -->
-  <div class="view" id="view-vendas-lista">
-    <button class="back" onclick="showView('view-vendas-setores')">← voltar aos setores</button>
-    <h2 class="setor-title" id="lista-titulo">Setor</h2>
-    <p class="setor-sub" id="lista-sub"></p>
-    <div class="vendor-list" id="lista-vendedores"></div>
-  </div>
+  <section id="mobile" class="screen">
+    <button class="back" onclick="showScreen('vendas')">← Voltar para Vendas</button>
+    <h2 class="section-title">Smartphones e Mobile</h2>
+    <p class="section-sub">Escolha um consultor para falar pelo WhatsApp.</p>
+    <div id="mobile-list" class="grid"></div>
+  </section>
 
-  <!-- ================= ENTREGAS ================= -->
-  <div class="view" id="view-entregas">
-    <button class="back" onclick="showView('view-home')">← voltar ao início</button>
-    <div class="eyebrow">Entregas</div>
-    <h1>Fale sobre sua entrega</h1>
-    <p class="lede">Chame direto no WhatsApp com o time de entregas.</p>
+  <section id="eletro" class="screen">
+    <button class="back" onclick="showScreen('vendas')">← Voltar para Vendas</button>
+    <h2 class="section-title">Eletrodomésticos</h2>
+    <p class="section-sub">Escolha um consultor para falar pelo WhatsApp.</p>
+    <div id="eletro-list" class="grid"></div>
+  </section>
 
-    <div class="vendor-list" style="max-width:480px;">
-      <div class="vendor-card">
-        <div class="vendor-left">
-          <span class="vendor-code">EN-01</span>
-          <span class="vendor-name">Mauricio</span>
-        </div>
-        <div class="vendor-actions">
-          <a class="btn whats" href="https://wa.me/5511998866832" target="_blank">Chamar no WhatsApp</a>
-        </div>
-      </div>
-      <div class="vendor-card">
-        <div class="vendor-left">
-          <span class="vendor-code">EN-02</span>
-          <span class="vendor-name">Douglas</span>
-        </div>
-        <div class="vendor-actions">
-          <a class="btn whats" href="https://wa.me/5511947572392" target="_blank">Chamar no WhatsApp</a>
-        </div>
-      </div>
-    </div>
-  </div>
+  <section id="duvidas" class="screen">
+    <button class="back" onclick="showScreen('home')">← Voltar</button>
+    <h2 class="section-title">Dúvidas frequentes</h2>
+    <p class="section-sub">Confira as principais informações antes de visitar nossa loja.</p>
 
-  <!-- ================= DÚVIDAS ================= -->
-  <div class="view" id="view-duvidas">
-    <button class="back" onclick="showView('view-home')">← voltar ao início</button>
-    <div class="eyebrow">Dúvidas frequentes</div>
-    <h1>Perguntas mais comuns</h1>
-    <div class="faq-list" id="faq-lista"></div>
-  </div>
+    <details class="faq"><summary>📍 Qual é o endereço?</summary><div class="answer">Rodovia Raposo Tavares, km 99, Sorocaba – SP, dentro do <strong>Panorâmico Power Center</strong>.</div></details>
+    <details class="faq"><summary>🕐 Qual é o horário de atendimento?</summary><div class="answer"><strong>Segunda a sábado:</strong> 10h às 21h.<br><strong>Domingos e feriados:</strong> 10h às 18h.</div></details>
+    <details class="faq"><summary>🛒 Como comprar?</summary><div class="answer">A venda é feita <strong>somente presencialmente em loja</strong>. Como nossos produtos podem conter pequenas avarias estéticas, é necessário que o cliente veja e escolha o produto.</div></details>
+    <details class="faq"><summary>⏳ Reservas</summary><div class="answer">Não fazemos nenhum tipo de reserva.</div></details>
+    <details class="faq"><summary>💳 Quais formas de pagamento?</summary><div class="answer">Não parcelamos no boleto ou crediário. Aceitamos apenas: <strong>PIX, dinheiro, cartão de crédito e cartão de débito.</strong></div></details>
+    <details class="faq"><summary>🚚 Entrega</summary><div class="answer">Não fazemos entrega, mas no ato da compra temos alguns prestadores de serviço para <strong>INDICAR</strong>.</div></details>
+    <details class="faq"><summary>📦 Os produtos têm avarias?</summary><div class="answer">Todos os nossos produtos podem conter <strong>avarias estéticas</strong>, mas nenhum produto possui avaria funcional.</div></details>
+    <details class="faq"><summary>🛡️ Qual é a garantia?</summary><div class="answer">Todos os produtos possuem <strong>90 dias de garantia</strong>, e você pode adicionar <strong>+9 meses como garantia estendida</strong>, totalizando 12 meses.</div></details>
+  </section>
+</main>
 
+<footer>© <span id="year"></span> • Fale com nosso time</footer>
 </div>
 
 <script>
-const vendedores = {
-  smartphones: {
-    titulo: "Smartphones e Mobile",
-    sub: "Fale direto com uma das nossas consultoras.",
-    lista: [
-      { codigo:"SM-01", nome:"Maju",     whats:"5515996039797" },
-      { codigo:"SM-02", nome:"Clau",     whats:"5515992745207" },
-      { codigo:"SM-03", nome:"Tais",     whats:"5515997376864" },
-      { codigo:"SM-04", nome:"Natalia",  whats:"5511949931537" },
-      { codigo:"SM-05", nome:"Cintia",   whats:"5511997689931" },
-      { codigo:"SM-06", nome:"Gabi",     whats:"5515981192404" },
-      { codigo:"SM-07", nome:"Narieli",  whats:"5515998055997" },
-    ]
-  },
-  eletro: {
-    titulo: "Eletrodomésticos",
-    sub: "Fale direto com um dos nossos consultores.",
-    lista: [
-      { codigo:"EL-01", nome:"Joao",      whats:"5515991806356" },
-      { codigo:"EL-02", nome:"Jose",      whats:"5515988083923" },
-      { codigo:"EL-03", nome:"Rafael",    whats:"5515996215875" },
-      { codigo:"EL-04", nome:"Leandro",   whats:"5515981664099" },
-      { codigo:"EL-05", nome:"Cristian",  whats:"5511998660107" },
-      { codigo:"EL-07", nome:"Cesar",     whats:"5515997060702" },
-      { codigo:"EL-08", nome:"Anderson",  whats:"5511952462878" },
-      { codigo:"EL-09", nome:"Bruno",     whats:"5515981712843" },
-      { codigo:"EL-10", nome:"Santana",   whats:"5515981362103" },
-      { codigo:"EL-11", nome:"Odair",     whats:"5511992447051" },
-      { codigo:"EL-12", nome:"Ingrid",    whats:"5511974282214" },
-      { codigo:"EL-13", nome:"Edvan",     whats:"5515981492770" },
-      { codigo:"EL-14", nome:"Everton",   whats:"5515996303585" },
-      { codigo:"EL-15", nome:"Vinicius",  whats:"5515981463754" },
-      { codigo:"EL-17", nome:"Felipe",    whats:"5515998270561" },
-    ]
-  }
-};
-
-const faqs = [
-  { p:"Qual o endereço da loja?", r:"Rodovia Raposo Tavares, km 99, Sorocaba - SP, dentro do Panorâmico Power Center." },
-  { p:"Qual o horário de atendimento?", r:"Segunda a sábado, das 10h às 21h. Domingos e feriados, das 10h às 18h." },
-  { p:"Como faço para comprar?", r:"A venda é feita somente presencialmente, em loja. Como nossos produtos podem ter pequenas avarias estéticas, é necessário que o cliente veja e escolha o produto pessoalmente." },
-  { p:"Reservas", r:"Não fazemos nenhum tipo de reserva." },
-  { p:"Quais formas de pagamento vocês aceitam?", r:"Aceitamos PIX, dinheiro, cartão de crédito e cartão de débito. Não parcelamos no boleto nem em crediário." },
-  { p:"Vocês entregam os produtos?", r:"Nenhum produto tem entrega inclusa. Trabalhamos com dois prestadores de entrega parceiros da loja — fale com o time de Entregas para consultar o orçamento." },
-  { p:"Os produtos têm algum problema?", r:"Todos os produtos podem conter avarias estéticas, mas nenhum tipo de avaria funcional." },
-  { p:"Qual a garantia dos produtos?", r:"Todos os produtos têm garantia de 3 meses. Também é possível adquirir uma garantia estendida de 12 meses, com valor passado pelo vendedor no ato da compra." },
+const mobile = [
+  ["Maju","+55 15 99603-9797","5515996039797"],
+  ["Clau","+55 15 99274-5207","5515992745207"],
+  ["Taís","+55 15 99737-6864","5515997376864"],
+  ["Natalia","+55 11 94993-1537","5511949931537"],
+  ["Cintia","+55 15 99805-9588","5515998059588"],
+  ["Gabi","+55 15 98119-2404","5515981192404"],
+  ["Narieli","+55 15 99805-5997","5515998055997"]
 ];
 
-function showView(id){
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo({top:0, behavior:'smooth'});
+const eletro = [
+  ["João","+55 15 99180-6356","5515991806356"],
+  ["José","+55 15 98808-3923","5515988083923"],
+  ["Rafael","+55 15 99621-5875","5515996215875"],
+  ["Leandro","+55 15 98166-4099","5515981664099"],
+  ["Cesar","+55 15 99706-0702","5515997060702"],
+  ["Bruno","+55 15 98171-2843","5515981712843"],
+  ["Santana","+55 15 98136-2103","5515981362103"],
+  ["Odair","+55 11 99244-7051","5511992447051"],
+  ["Ingrid","+55 11 91693-1343","5511916931343"],
+  ["Vinicius","+55 15 98146-3754","5515981463754"],
+];
+
+function personCard([name, phone, wa]){
+  const initial = name.charAt(0);
+  const msg = encodeURIComponent("Olá! Vim pelo catálogo e gostaria de falar com você.");
+  return `<div class="person">
+    <div class="avatar">${initial}</div>
+    <div class="person-info"><div class="person-name">${name}</div><div class="phone">${phone}</div></div>
+    <a class="whats" href="https://wa.me/${wa}?text=${msg}" target="_blank" rel="noopener">WhatsApp</a>
+  </div>`;
 }
 
-function abrirSetor(chave){
-  const setor = vendedores[chave];
-  document.getElementById('lista-titulo').textContent = setor.titulo;
-  document.getElementById('lista-sub').textContent = setor.sub;
-  document.getElementById('lista-vendedores').innerHTML = setor.lista.map(v => `
-    <div class="vendor-card">
-      <div class="vendor-left">
-        <span class="vendor-code">${v.codigo}</span>
-        <span class="vendor-name">${v.nome}</span>
-      </div>
-      <div class="vendor-actions">
-        <a class="btn whats" href="https://wa.me/${v.whats}" target="_blank">Chamar no WhatsApp</a>
-      </div>
-    </div>
-  `).join('');
-  showView('view-vendas-lista');
-}
+document.getElementById("mobile-list").innerHTML = mobile.map(personCard).join("");
+document.getElementById("eletro-list").innerHTML = eletro.map(personCard).join("");
+document.getElementById("year").textContent = new Date().getFullYear();
 
-function renderContadores(){
-  document.getElementById('count-smartphones').textContent = vendedores.smartphones.lista.length + " consultores disponíveis";
-  document.getElementById('count-eletro').textContent = vendedores.eletro.lista.length + " consultores disponíveis";
+function showScreen(id){
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+  history.replaceState(null,"","#"+id);
 }
-
-function renderFaq(){
-  const el = document.getElementById('faq-lista');
-  el.innerHTML = faqs.map((f, i) => `
-    <div class="faq-item" id="faq-${i}">
-      <button class="faq-q" onclick="toggleFaq(${i})">
-        <span>${f.p}</span>
-        <span class="plus">+</span>
-      </button>
-      <div class="faq-a">${f.r}</div>
-    </div>
-  `).join('');
-}
-
-function toggleFaq(i){
-  document.getElementById('faq-' + i).classList.toggle('open');
-}
-
-renderContadores();
-renderFaq();
 </script>
 </body>
 </html>
